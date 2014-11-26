@@ -39,9 +39,67 @@ int aim_y_curve = 0;
 // that have a short/long option.
 int long_delay_amount = 500;
 
-// -----------------------------------------------------------------------------
-// TODO: Bind keys to constants here. ------------------------------------------
-// -----------------------------------------------------------------------------
+// Key Bindings
+define SC_ROLL_AXIS                     DX_X_AXIS
+define SC_PITCH_AXIS                    DX_Y_AXIS
+define SC_THROTTLE_AXIS                 DX_THROTTLE_AXIS
+
+define SC_WEAPON_GROUP_1                DX1
+define SC_WEAPON_GROUP_2                DX6
+define SC_LAUNCH_MISSILE                DX2
+define SC_IFCS_TOGGLE                   DX5
+define SC_LAUNCH_COUNTERMEASURE         DX15
+define SC_SCOREBOARD                    DX4
+define SC_TARGET_NEAREST_HOSTILE        DX7
+define SC_TARGET_HOSTILE_FWD            DX9
+define SC_PIN_FOCUSED_TARGET            USB_G
+define SC_TARGET_ALL_FWD                DX8
+define SC_TARGET_ALL_BACK               DX10
+define SC_MISSILE_CYCLE_FWD             DX12
+define SC_MISSILE_CYCLE_BACK            DX14
+define SC_POWER_GROUP_1                 USB_1
+define SC_POWER_GROUP_2                 USB_2
+define SC_POWER_GROUP_3                 USB_3
+define SC_POWER_GROUP_RESET             USB_4
+define SC_RADAR_ZOOM                    DX18
+define SC_COUNTERMEASURE_CYCLE_FWD      DX17
+define SC_SHIELD_FWD                    DX22
+define SC_SHIELD_AFT                    DX24
+define SC_SHIELD_LEFT                   DX25
+define SC_SHIELD_RIGHT                  DX23
+define SC_SHIELD_RESET                  DX26
+define SC_SHIELD_BOOST_RECHARGE         USB_C
+define SC_BRAKE                         DX20
+define SC_AFTERBURNER                   DX32
+define SC_AIM_RESET                     USB_RIGHT_SHIFT
+define SC_HUD_OVERVIEW                  USB_F1
+define SC_HUD_WEAPONS                   USB_F2
+define SC_HUD_POWER                     USB_F3
+define SC_HUD_SHIELDS                   USB_F4
+define SC_IFCS_DECOUPLE                 DX21
+define SC_EJECT                         DX30
+define SC_USE_DOCKING                   DX31
+define SC_RUNNING_LIGHTS                USB_O
+define SC_CABIN_LIGHTS                  USB_O
+define SC_HUD_TAB_1                     USB_F1
+define SC_HUD_TAB_2                     USB_F2
+define SC_HUD_TAB_3                     USB_F3
+define SC_HUD_TAB_4                     USB_F4
+define SC_HUD_TAB_5                     USB_F5
+define SC_HUD_TAB_6                     USB_F6
+define SC_HUD_TAB_7                     USB_F7
+define SC_HUD_TAB_8                     USB_F8
+define SC_HUD_TAB_9                     USB_F9
+define SC_HUD_TAB_10                    USB_F10
+define SC_HUD_MAXIMIZE                  USB_F11
+define SC_HUD_CONFIRM                   USB_RETURN
+define SC_HUD_LEFT_PANEL_UP             USB_UP_ARROW
+define SC_HUD_LEFT_PANEL_DOWN           USB_DOWN_ARROW
+define SC_HUD_LEFT_PANEL_LEFT           USB_LEFT_ARROW
+define SC_HUD_LEFT_PANEL_RIGHT          USB_RIGHT_ARROW
+define SC_HUD_MODE_FWD                  USB_SEMICOLON
+define SC_HUD_MODE_BACK                 USB_APOSTROPHE
+
 
 int main()
 {
@@ -57,9 +115,9 @@ int main()
     // -------------
     // Joystick Axes
     // -------------
-    MapAxis(&Joystick, JOYX, DX_X_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
+    MapAxis(&Joystick, JOYX, SC_ROLL_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
     SetSCurve(&Joystick, JOYX, 0, 0, 0, x_curve, 0);
-    MapAxis(&Joystick, JOYY, DX_Y_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
+    MapAxis(&Joystick, JOYY, SC_PITCH_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
     SetSCurve(&Joystick, JOYY, 0, 0, 0, y_curve, 0);
     
     // -------------
@@ -67,7 +125,7 @@ int main()
     // -------------
     
     // Throttle
-    MapAxis(&Throttle, THR_RIGHT, DX_Z_AXIS, AXIS_NORMAL, MAP_ABSOLUTE); // Throttle
+    MapAxis(&Throttle, THR_RIGHT, SC_THROTTLE_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
     SetSCurve(&Throttle, THR_RIGHT, 0, 0, 0, throttle_curve, 0);
     
     // Slew Control - Strafe
@@ -104,33 +162,33 @@ int main()
     MapKey(&Throttle, PSB, EXEC("weapon_selector();"));
     
     // MMCB
-    MapKey(&Joystick, S1, DX5); // IFCS Toggle Safety (Short)
-    // MapKey(&Joystick, S1,   DX5); // Use Docking (Long)
+    MapKey(&Joystick, S1, SC_IFCS_TOGGLE); // Short
+    // MapKey(&Joystick, S1, SC_USE_DOCKING); // Long
     
     // Weapon Release
-    MapKey(&Joystick, S2, DX2); // Launch Missile
+    MapKey(&Joystick, S2, SC_LAUNCH_MISSILE);
     
     // NWS
-    MapKey(&Joystick, S3, DX15); // Countermeasure
+    MapKey(&Joystick, S3, SC_LAUNCH_COUNTERMEASURE);
     
     // Paddle Switch
-    MapKey(&Joystick, S4, USB_LEFT_ALT); // Show Scoreboard
+    MapKey(&Joystick, S4, SC_SCOREBOARD);
     
     // TMS Hat
     MapKey(&Joystick, H2U, TEMPO(
-        DX7,    // Target Nearest Hostile (Short)
-        USB_G,  //Pin Focused Target (Long)
+        SC_TARGET_NEAREST_HOSTILE, // Short
+        SC_PIN_FOCUSED_TARGET,     // Long
         long_delay_amount
     ));
-    MapKey(&Joystick, H2D, DX9); // Cycle Hostile Forward (Short)
-    // MapKey(&Joystick, H2D,  DX9); // Target Nearest Landzone (Long)
+    MapKey(&Joystick, H2D, SC_TARGET_HOSTILE_FWD); // Short
+    // MapKey(&Joystick, H2D,  TARGET_NEAREST_LANDZONE); // Long
     // TODO: Fwd/Back modified by LASTE switch ---------------------------------
     //       PATH    - Friendlies
     //       ALT/HDG - All
     //       ALT     - Hostile
     // -------------------------------------------------------------------------
-    MapKey(&Joystick, H2L, DX10); // Target Cycle All Back
-    MapKey(&Joystick, H2R, DX8); // Target Cycle All Fwd
+    MapKey(&Joystick, H2L, SC_TARGET_ALL_BACK);
+    MapKey(&Joystick, H2R, SC_TARGET_ALL_FWD);
     
     // DMS Hat
     // Modified by EAC switch --------------------------------------------------
@@ -151,12 +209,12 @@ int main()
     MapKey(&Throttle, EACOFF, EXEC("power_selector();"));
     
     // CMS Hat
-    MapKey(&Joystick, H4U, DX15); // Launch Countermeasure
-    MapKey(&Joystick, H4D, DX17); // Cycle Countermeasure Fwd
-    MapKey(&Joystick, H4L, DX18); // Radar Zoom Back
-    MapKey(&Joystick, H4R, DX16); // Radar Zoom Fwd
-    MapKey(&Joystick, H4P, DX19); // Radar Active/Passive (Short)
-    // MapKey(&Joystick, H4P,  DX19); // Radar On/Off (Long)
+    MapKey(&Joystick, H4U, SC_LAUNCH_COUNTERMEASURE);
+    MapKey(&Joystick, H4D, SC_COUNTERMEASURE_CYCLE_FWD);
+    MapKey(&Joystick, H4L, SC_RADAR_ZOOM);
+    MapKey(&Joystick, H4R, SC_RADAR_ZOOM);
+    // MapKey(&Joystick, H4P, RADAR_ACTIVE_PASSIVE); // Short
+    // MapKey(&Joystick, H4P, RADAR_ON_OFF); // Long
     
     // Unnecessary unless overriding DX hat.
     // MapKey(&Joystick, H1U, );
@@ -169,18 +227,18 @@ int main()
     // ----------------
     
     // Coolie Hat
-    MapKey(&Throttle, CSU, USB_F1); // HUD: Overview
-    MapKey(&Throttle, CSD, USB_F4); // HUD: Shields
-    MapKey(&Throttle, CSL, USB_F2); // HUD: Weapons
-    MapKey(&Throttle, CSR, USB_F3); // HUD: Power
+    MapKey(&Throttle, CSU, SC_HUD_OVERVIEW);
+    MapKey(&Throttle, CSD, SC_HUD_SHIELDS);
+    MapKey(&Throttle, CSL, SC_HUD_WEAPONS);
+    MapKey(&Throttle, CSR, SC_HUD_POWER);
     
     // Mic Switch
-    MapKey(&Throttle, MSU, DX22); // Shields Up
-    MapKey(&Throttle, MSD, DX24); // Shields Down
-    MapKey(&Throttle, MSL, DX25); // Shields Left
-    MapKey(&Throttle, MSR, DX23); // Shields Right
+    MapKey(&Throttle, MSU, SC_SHIELD_FWD);
+    MapKey(&Throttle, MSD, SC_SHIELD_AFT);
+    MapKey(&Throttle, MSL, SC_SHIELD_LEFT);
+    MapKey(&Throttle, MSR, SC_SHIELD_RIGHT);
     
-    MapKey(&Throttle, MSP, USB_RETURN); // Voice Attack Command
+    MapKey(&Throttle, MSP, SC_SHIELD_RESET);
     
     // Slew Control Button
     // TODO: Modified by boat switch -------------------------------------------
@@ -188,11 +246,11 @@ int main()
     //       MID - Aiming reticule control
     //       AFT - Decoupled mode control
     // -------------------------------------------------------------------------
-    MapKey(&Throttle, SC, DX21); // IFCS Vector Decoupling
+    MapKey(&Throttle, SC, SC_IFCS_DECOUPLE);
     
-    // Speed Brake
-    MapKey(&Throttle, SPDF, DX32); // Afterburner
-    MapKey(&Throttle, SPDB, DX20); // Brake
+    // Speed SC_Brake
+    MapKey(&Throttle, SPDF, SC_AFTERBURNER);
+    MapKey(&Throttle, SPDB, SC_BRAKE);
     
     // Boat Switch
     // MapKey(&Throttle, BSF,       );
@@ -200,10 +258,9 @@ int main()
     // MapKey(&Throttle, BSB,       );
     
     // China Hat
-    MapKey(&Throttle, CHF, USB_C); // Reset Aim Reticule
+    MapKey(&Throttle, CHF, SC_AIM_RESET);
     // MapKey(&Throttle, CHM,       );
-    // MapKey(&Throttle, CHB,       USB_RIGHT_CONTROL + USB_KEYPAD_5); // Shield Reset Level
-    MapKey(&Throttle, CHB, DX26); // Shield Reset Level
+    MapKey(&Throttle, CHB, SC_SHIELD_RESET);
     
     // Left Throttle Button
     // MapKey(&Throttle, LTB, );
@@ -215,7 +272,7 @@ int main()
     // MapKey(&Throttle, APUON,     );
     
     // Landing Gear Horn Silence
-    MapKey(&Throttle, LDGH, DX30); // Eject
+    MapKey(&Throttle, LDGH, SC_EJECT);
     
     // Flaps
     // MapKey(&Throttle, FLAPU,     );
@@ -226,7 +283,7 @@ int main()
     // MapKey(&Throttle, RDRNRM,    );
     
     // Autopilot Engage (Black Button On Base)
-    MapKey(&Throttle, APENG, DX31); // Use Docking
+    MapKey(&Throttle, APENG, SC_USE_DOCKING);
     
     // MapKey(&Throttle, APPAT,     );
     // MapKey(&Throttle, APAH,      );
@@ -247,86 +304,79 @@ int main()
     // MapKey(&Throttle, EOLNORM,   );
     // MapKey(&Throttle, EORNORM,   );
     
-    
-    // ---------------
-    // Spare DX Inputs
-    // DX27
-    // DX28
-    // DX29
-    // ---------------
-    
-    
     // ----------------
     // Left MFD Buttons
     // ----------------
+    
     // MapKey(&LMFD, OSB01, );
     // MapKey(&LMFD, OSB02, );
-    // MapKey(&LMFD, OSB03, ); // Radar Active/Passive
+    // MapKey(&LMFD, OSB03, RADAR_ACTIVE_PASSIVE);
     // MapKey(&LMFD, OSB04, );
     // MapKey(&LMFD, OSB05, );
     
-    // MapKey(&LMFD, OSB06, ); // Radar On/Off
+    // MapKey(&LMFD, OSB06, RADAR_ON_OFF);
     // MapKey(&LMFD, OSB07, );
-    // MapKey(&LMFD, OSB08, ); // Shield Generator On/Off
+    // MapKey(&LMFD, OSB08, SHIELD_GEN_ON_OFF);
     // MapKey(&LMFD, OSB09, );
-    // MapKey(&LMFD, OSB10, ); // Targeting CPU On/Off
+    // MapKey(&LMFD, OSB10, TARGETING_CPU_ON_OFF);
     
     // MapKey(&LMFD, OSB11, );
     // MapKey(&LMFD, OSB12, );
-    MapKey(&LMFD, OSB13, USB_O); // Runing Lights
+    MapKey(&LMFD, OSB13, SC_RUNNING_LIGHTS);
     // MapKey(&LMFD, OSB14, );
-    MapKey(&LMFD, OSB15, USB_O); // Cabin Lights
+    MapKey(&LMFD, OSB15, SC_CABIN_LIGHTS);
     
     // MapKey(&LMFD, OSB16, );
     // MapKey(&LMFD, OSB17, );
-    MapKey(&LMFD, OSB18, USB_C); // Shield Boost Recharge
+    MapKey(&LMFD, OSB18, SC_SHIELD_BOOST_RECHARGE);
     // MapKey(&LMFD, OSB19, );
-    MapKey(&LMFD, OSB20, USB_SPACE); // Use Docking
+    MapKey(&LMFD, OSB20, SC_USE_DOCKING);
     
-    MapKey(&LMFD, SYMU, USB_COMMA); // Radar Zoom In
-    MapKey(&LMFD, SYMD, USB_COMMA); // Radar Zoom Out
+    MapKey(&LMFD, SYMU, SC_RADAR_ZOOM);
+    MapKey(&LMFD, SYMD, SC_RADAR_ZOOM);
     // MapKey(&LMFD, CONU,  );
     // MapKey(&LMFD, COND,  );
     // MapKey(&LMFD, BRTU,  ); // Cycle Friendly Fwd
     // MapKey(&LMFD, BRTD,  ); // Cycle Friendly Back
-    // MapKey(&LMFD, GAINU, ); // Radar Mode Fwd
-    // MapKey(&LMFD, GAIND, ); // Radar Mode Back
+    // MapKey(&LMFD, GAINU, RADAR_MODE_FWD);
+    // MapKey(&LMFD, GAIND, RADAR_MOODE_BACK);
     
     // -----------------
     // Right MFD Buttons
     // -----------------
-    MapKey(&RMFD, OSB01, USB_F1); // Tab 1
-    MapKey(&RMFD, OSB02, USB_F2); // Tab 2
-    MapKey(&RMFD, OSB03, USB_F3); // Tab 3
-    MapKey(&RMFD, OSB04, USB_F4); // Tab 4
-    MapKey(&RMFD, OSB05, USB_F5); // Tab 5
     
-    // MapKey(&RMFD, OSB06, ); // Cancel
+    MapKey(&RMFD, OSB01, SC_HUD_TAB_1);
+    MapKey(&RMFD, OSB02, SC_HUD_TAB_2);
+    MapKey(&RMFD, OSB03, SC_HUD_TAB_3);
+    MapKey(&RMFD, OSB04, SC_HUD_TAB_4);
+    MapKey(&RMFD, OSB05, SC_HUD_TAB_5);
+    
+    // MapKey(&RMFD, OSB06, HUD_CANCEL);
     // MapKey(&RMFD, OSB07, );
-    MapKey(&RMFD, OSB08, USB_F11); // Maximize
+    MapKey(&RMFD, OSB08, SC_HUD_MAXIMIZE);
     // MapKey(&RMFD, OSB09, );
     // MapKey(&RMFD, OSB10, );
     
-    MapKey(&RMFD, OSB11, USB_F10); // Tab 10
-    MapKey(&RMFD, OSB12, USB_F9);  // Tab 9
-    MapKey(&RMFD, OSB13, USB_F8);  // Tab 8
-    MapKey(&RMFD, OSB14, USB_F7);  // Tab 7
-    MapKey(&RMFD, OSB15, USB_F6);  // Tab 6
+    MapKey(&RMFD, OSB11, SC_HUD_TAB_10);
+    MapKey(&RMFD, OSB12, SC_HUD_TAB_9);
+    MapKey(&RMFD, OSB13, SC_HUD_TAB_8);
+    MapKey(&RMFD, OSB14, SC_HUD_TAB_7);
+    MapKey(&RMFD, OSB15, SC_HUD_TAB_6);
     
-    MapKey(&RMFD, OSB16, USB_LEFT_ALT); // Score Board
+    MapKey(&RMFD, OSB16, SC_SCOREBOARD);
     // MapKey(&RMFD, OSB17, );
-    // MapKey(&RMFD, OSB18, ); // Interact
+    // MapKey(&RMFD, OSB18, HUD_INTERACT);
     // MapKey(&RMFD, OSB19, );
-    MapKey(&RMFD, OSB20, USB_RETURN); // Confirm
+    MapKey(&RMFD, OSB20, SC_HUD_CONFIRM);
     
-    MapKey(&RMFD, SYMU,  USB_UP_ARROW);    // Left Panel Up
-    MapKey(&RMFD, SYMD,  USB_DOWN_ARROW);  // Left Panel Down
-    MapKey(&RMFD, CONU,  USB_LEFT_ARROW);  // Left Panel Left
-    MapKey(&RMFD, COND,  USB_RIGHT_ARROW); // Left Panel Right
+    MapKey(&RMFD, SYMU,  SC_HUD_LEFT_PANEL_UP);
+    MapKey(&RMFD, SYMD,  SC_HUD_LEFT_PANEL_DOWN);
+    MapKey(&RMFD, CONU,  SC_HUD_LEFT_PANEL_LEFT);
+    MapKey(&RMFD, COND,  SC_HUD_LEFT_PANEL_RIGHT);
     // MapKey(&RMFD, BRTU, );
     // MapKey(&RMFD, BRTD, );
-    MapKey(&RMFD, GAINU, USB_SEMICOLON);   // Cycle Mode Fwd
-    MapKey(&RMFD, GAIND, USB_APOSTROPHE);  // Cycle Mode Back
+    MapKey(&RMFD, GAINU, SC_HUD_MODE_FWD);
+    MapKey(&RMFD, GAIND, SC_HUD_MODE_BACK);
 }
 
 int EventHandle(int type, alias o, int x)
@@ -337,16 +387,16 @@ int EventHandle(int type, alias o, int x)
 int weapon_selector() {
     if (Throttle[PSB]) {
         // Inverted
-        if (Joystick[TG1]) ActKey(KEYON+DX6); else ActKey(DX6);
-        if (Joystick[TG2]) ActKey(KEYON+DX1); else ActKey(DX1);
+        if (Joystick[TG1]) ActKey(KEYON+SC_WEAPON_GROUP_2); else ActKey(SC_WEAPON_GROUP_2);
+        if (Joystick[TG2]) ActKey(KEYON+SC_WEAPON_GROUP_1); else ActKey(SC_WEAPON_GROUP_1);
         // LED(&Throttle, LED_ONOFF, LED_CURRENT+LED1);
     }
     else if (Throttle[PSF]) {
     }
     else {
         // Normal
-        if (Joystick[TG1]) ActKey(KEYON+DX1); else ActKey(DX1);
-        if (Joystick[TG2]) ActKey(KEYON+DX6); else ActKey(DX6);
+        if (Joystick[TG1]) ActKey(KEYON+SC_WEAPON_GROUP_1); else ActKey(SC_WEAPON_GROUP_1);
+        if (Joystick[TG2]) ActKey(KEYON+SC_WEAPON_GROUP_2); else ActKey(SC_WEAPON_GROUP_2);
         // LED(&Throttle, LED_ONOFF, LED_CURRENT-LED1);
     }
 }
@@ -354,16 +404,16 @@ int weapon_selector() {
 int power_selector() {
     if (Throttle[EACON]) {
         // Power Management
-        if (Joystick[H3U]) ActKey(KEYON+USB_4); else ActKey(USB_4);
-        if (Joystick[H3D]) ActKey(KEYON+USB_3); else ActKey(USB_3);
-        if (Joystick[H3L]) ActKey(KEYON+USB_1); else ActKey(USB_1);
-        if (Joystick[H3R]) ActKey(KEYON+USB_2); else ActKey(USB_2);
+        if (Joystick[H3U]) ActKey(KEYON+SC_POWER_GROUP_RESET); else ActKey(SC_POWER_GROUP_RESET);
+        if (Joystick[H3D]) ActKey(KEYON+SC_POWER_GROUP_3); else ActKey(SC_POWER_GROUP_3);
+        if (Joystick[H3L]) ActKey(KEYON+SC_POWER_GROUP_1); else ActKey(SC_POWER_GROUP_1);
+        if (Joystick[H3R]) ActKey(KEYON+SC_POWER_GROUP_2); else ActKey(SC_POWER_GROUP_2);
     }
     else {
         // Missile Management
-        if (Joystick[H3U]) ActKey(KEYON+DX11); else ActKey(DX11); // Dynamic Focus
-        if (Joystick[H3D]) ActKey(KEYON+DX13); else ActKey(DX13);
-        if (Joystick[H3L]) ActKey(KEYON+DX14); else ActKey(DX14); // Cycle Missile Back
-        if (Joystick[H3R]) ActKey(KEYON+DX12); else ActKey(DX12); // Cycle Missile Fwd
+        // if (Joystick[H3U]) ActKey(KEYON+DX11); else ActKey(DX11); // Dynamic Focus
+        // if (Joystick[H3D]) ActKey(KEYON+DX13); else ActKey(DX13);
+        if (Joystick[H3L]) ActKey(KEYON+SC_MISSILE_CYCLE_BACK); else ActKey(SC_MISSILE_CYCLE_BACK);
+        if (Joystick[H3R]) ActKey(KEYON+SC_MISSILE_CYCLE_FWD); else ActKey(SC_MISSILE_CYCLE_FWD);
     }
 }
