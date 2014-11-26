@@ -52,7 +52,7 @@ define SC_LAUNCH_COUNTERMEASURE         DX15
 define SC_SCOREBOARD                    DX4
 define SC_TARGET_NEAREST_HOSTILE        DX7
 define SC_TARGET_HOSTILE_FWD            DX9
-define SC_PIN_FOCUSED_TARGET            USB_G
+define SC_PIN_FOCUSED_TARGET            DX11
 define SC_TARGET_ALL_FWD                DX8
 define SC_TARGET_ALL_BACK               DX10
 define SC_MISSILE_CYCLE_FWD             DX12
