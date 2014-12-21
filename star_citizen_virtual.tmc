@@ -46,6 +46,7 @@ define SC_THROTTLE_AXIS                 DX_THROTTLE_AXIS
 
 define SC_WEAPON_GROUP_1                DX1
 define SC_WEAPON_GROUP_2                DX6
+define SC_WEAPON_GROUP_3                DX3
 define SC_LAUNCH_MISSILE                DX2
 define SC_IFCS_TOGGLE                   DX5
 define SC_LAUNCH_COUNTERMEASURE         DX15
@@ -160,6 +161,8 @@ int main()
     // Reevaluate logic when pinky switch changes state.
     MapKey(&Throttle, PSM, EXEC("weapon_selector();"));
     MapKey(&Throttle, PSB, EXEC("weapon_selector();"));
+    
+    MapKey(&Joystick, H4P, SC_WEAPON_GROUP_3);
     
     // MMCB
     MapKey(&Joystick, S1, SC_IFCS_TOGGLE); // Short
