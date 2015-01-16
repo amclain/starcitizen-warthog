@@ -22,6 +22,28 @@
 // THE SOFTWARE.
 // -----------------------------------------------------------------------------
 
+
+// TODO: Make trim hat a weapon selector.
+//       Short tap up/down/left/right sets TG1 to weapon 1/2/3/4.
+//       Long tap sets TG2 to weapon.
+//       Throttle LED shows TG1 current weapon.
+
+// TODO: Change S1 IFCS
+//       Short = cronstab toggle
+//       Long  = gsafe toggle
+
+// TODO: Voice Attack on throttle left button
+//          OR
+//       Remap mic switch to comms and move shields (to CMS?).
+//       Mic up/down/left/right used for:
+//          In-Game, TeamSpeak, Future, Future
+//       Mic push:
+//          Voice Attack
+
+// TODO: Boat switch changes coolie hat between UI selector (BSM) and
+//       strafing thrusters (BSF).
+
+
 // TARGET Script
 include "target.tmh"
 include "usb_keys.tmh"
