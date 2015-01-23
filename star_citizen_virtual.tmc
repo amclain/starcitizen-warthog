@@ -1,7 +1,7 @@
 // -----------------------------------------------------------------------------
 // The MIT License (MIT)
 // 
-// Copyright (c) 2014 Alex McLain
+// Copyright (c) 2014-2015 Alex McLain
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -69,6 +69,7 @@ define SC_THROTTLE_AXIS                 DX_THROTTLE_AXIS
 define SC_WEAPON_GROUP_1                DX1
 define SC_WEAPON_GROUP_2                DX6
 define SC_WEAPON_GROUP_3                DX3
+define SC_WEAPON_GROUP_4                DX13
 define SC_LAUNCH_MISSILE                DX2
 define SC_IFCS_TOGGLE                   DX5
 define SC_LAUNCH_COUNTERMEASURE         DX15
