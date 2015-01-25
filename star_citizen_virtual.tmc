@@ -69,7 +69,7 @@ define SC_THROTTLE_AXIS                 DX_THROTTLE_AXIS
 define SC_WEAPON_GROUP_1                DX1
 define SC_WEAPON_GROUP_2                DX6
 define SC_WEAPON_GROUP_3                DX3
-define SC_WEAPON_GROUP_4                DX13
+define SC_WEAPON_GROUP_4                DX13 // TODO: Add to XML
 define SC_LAUNCH_MISSILE                DX2
 define SC_IFCS_TOGGLE                   DX5
 define SC_LAUNCH_COUNTERMEASURE         DX15
@@ -124,6 +124,16 @@ define SC_HUD_LEFT_PANEL_RIGHT          USB_RIGHT_ARROW
 define SC_HUD_MODE_FWD                  USB_SEMICOLON
 define SC_HUD_MODE_BACK                 USB_APOSTROPHE
 
+define LED_INTENSITY_LEVEL_0            0
+define LED_INTENSITY_LEVEL_1            43
+define LED_INTENSITY_LEVEL_2            86
+define LED_INTENSITY_LEVEL_3            129
+define LED_INTENSITY_LEVEL_4            172
+define LED_INTENSITY_LEVEL_5            215
+
+
+int tg1_weapon = SC_WEAPON_GROUP_1;
+int tg2_weapon = SC_WEAPON_GROUP_2;
 
 int main()
 {
@@ -131,6 +141,10 @@ int main()
     Configure(&T16000, MODE_EXCLUDED);
     
     if(Init(&EventHandle)) return 1;
+    
+    ActKey(PULSE + KEYON + LED(&Throttle, LED_INTENSITY, LED_INTENSITY_LEVEL_1));
+    
+    EXEC("update_leds();");
     
     SetKBRate(32, 50);
     SetKBLayout(KB_ENG);
@@ -169,21 +183,52 @@ int main()
     // ----------------
     
     // Trigger
-    // Selectable with pinky switch. -------------------------------------------
-    // Swaps lasers and guns.
+    // Selectable with trim hat. -----------------------------------------------
+    // Short = TG1, Long = TG2
+    //       H1U - Weapon Group 1
+    //       H1D - Weapon Group 2
+    //       H1L - Weapon Group 3
+    //       H1R - Weapon Group 4
+    // Swappable with pinky switch. --------------------------------------------
     //       FWD - TODO: Expose group 3/4?
     //       MID - Normal:   TG1=Group1, TG2=Group2
     //       AFT - Reversed: TG1=Group2, TG2=Group1
     // -------------------------------------------------------------------------
+    // NOTE:
+    //       Hat always sets TG1 on short and TG2 on long.
+    //       Throttle LED's always show TG1 weapon.
+    //       Pinky switch swaps the values in tg1_weapon/tg2_weapon.
     MapKey(&Joystick, TG1, EXEC("weapon_selector();"));
     MapKey(&Joystick, TG2, EXEC("weapon_selector();"));
     
     MapKeyR(&Joystick, TG1, EXEC("weapon_selector();"));
     MapKeyR(&Joystick, TG2, EXEC("weapon_selector();"));
     
+    // Reevaluate logic when trim hat changes state.
+    MapKey(&Joystick, H1U, TEMPO(
+        EXEC("set_tg1_weapon(SC_WEAPON_GROUP_1);"),
+        EXEC("set_tg2_weapon(SC_WEAPON_GROUP_1);"),
+        long_delay_amount
+    ));
+    MapKey(&Joystick, H1D, TEMPO(
+        EXEC("set_tg1_weapon(SC_WEAPON_GROUP_2);"),
+        EXEC("set_tg2_weapon(SC_WEAPON_GROUP_2);"),
+        long_delay_amount
+    ));
+    MapKey(&Joystick, H1L, TEMPO(
+        EXEC("set_tg1_weapon(SC_WEAPON_GROUP_3);"),
+        EXEC("set_tg2_weapon(SC_WEAPON_GROUP_3);"),
+        long_delay_amount
+    ));
+    MapKey(&Joystick, H1R, TEMPO(
+        EXEC("set_tg1_weapon(SC_WEAPON_GROUP_4);"),
+        EXEC("set_tg2_weapon(SC_WEAPON_GROUP_4);"),
+        long_delay_amount
+    ));
+    
     // Reevaluate logic when pinky switch changes state.
-    MapKey(&Throttle, PSM, EXEC("weapon_selector();"));
-    MapKey(&Throttle, PSB, EXEC("weapon_selector();"));
+    MapKey(&Throttle, PSM, EXEC("update_leds(); weapon_selector();"));
+    MapKey(&Throttle, PSB, EXEC("update_leds(); weapon_selector();"));
     
     MapKey(&Joystick, H4P, SC_WEAPON_GROUP_3);
     
@@ -241,12 +286,6 @@ int main()
     MapKey(&Joystick, H4R, SC_RADAR_ZOOM);
     // MapKey(&Joystick, H4P, RADAR_ACTIVE_PASSIVE); // Short
     // MapKey(&Joystick, H4P, RADAR_ON_OFF); // Long
-    
-    // Unnecessary unless overriding DX hat.
-    // MapKey(&Joystick, H1U, );
-    // MapKey(&Joystick, H1D, );
-    // MapKey(&Joystick, H1L, );
-    // MapKey(&Joystick, H1R, );
     
     // ----------------
     // Throttle Buttons
@@ -410,36 +449,96 @@ int EventHandle(int type, alias o, int x)
     DefaultMapping(&o, x);
 }
 
+int set_tg1_weapon(int weapon)
+{
+    if (Joystick[TG1] & (tg1_weapon != weapon)) ActKey(tg1_weapon);
+    tg1_weapon = weapon;
+    if (Joystick[TG1]) ActKey(KEYON + tg1_weapon);
+    update_leds();
+}
+
+int set_tg2_weapon(int weapon)
+{
+    if (Joystick[TG2] & (tg2_weapon != weapon)) ActKey(tg2_weapon);
+    tg2_weapon = weapon;
+    if (Joystick[TG2]) ActKey(KEYON + tg2_weapon);
+    update_leds();
+}
+
 int weapon_selector() {
-    if (Throttle[PSB]) {
+    if (Throttle[PSB])
+    {
         // Inverted
-        if (Joystick[TG1]) ActKey(KEYON+SC_WEAPON_GROUP_2); else ActKey(SC_WEAPON_GROUP_2);
-        if (Joystick[TG2]) ActKey(KEYON+SC_WEAPON_GROUP_1); else ActKey(SC_WEAPON_GROUP_1);
-        // LED(&Throttle, LED_ONOFF, LED_CURRENT+LED1);
+        
+        // TODO: Fix hat logic when weapons are in inverted mode.
+        //       Doesn't fire when TG1 and TG2 are the same weapon.
+        //       Button jams on when switching weapon while firing.
+        if (tg1_weapon != tg2_weapon)
+            if (Joystick[TG1]) ActKey(KEYON + tg2_weapon); else ActKey(tg2_weapon);
+        
+        if (Joystick[TG2]) ActKey(KEYON + tg1_weapon); else ActKey(tg1_weapon);
     }
-    else if (Throttle[PSF]) {
-    }
-    else {
+    else
+    {
         // Normal
-        if (Joystick[TG1]) ActKey(KEYON+SC_WEAPON_GROUP_1); else ActKey(SC_WEAPON_GROUP_1);
-        if (Joystick[TG2]) ActKey(KEYON+SC_WEAPON_GROUP_2); else ActKey(SC_WEAPON_GROUP_2);
-        // LED(&Throttle, LED_ONOFF, LED_CURRENT-LED1);
+        if (Joystick[TG1]) ActKey(KEYON + tg1_weapon); else ActKey(tg1_weapon);
+        
+        if (tg1_weapon != tg2_weapon)
+            if (Joystick[TG2]) ActKey(KEYON + tg2_weapon); else ActKey(tg2_weapon);
     }
 }
 
-int power_selector() {
-    if (Throttle[EACON]) {
-        // Power Management
-        if (Joystick[H3U]) ActKey(KEYON+SC_POWER_GROUP_RESET); else ActKey(SC_POWER_GROUP_RESET);
-        if (Joystick[H3D]) ActKey(KEYON+SC_POWER_GROUP_3); else ActKey(SC_POWER_GROUP_3);
-        if (Joystick[H3L]) ActKey(KEYON+SC_POWER_GROUP_1); else ActKey(SC_POWER_GROUP_1);
-        if (Joystick[H3R]) ActKey(KEYON+SC_POWER_GROUP_2); else ActKey(SC_POWER_GROUP_2);
+int update_leds()
+{
+    // Throttle LED's off.
+    // This also causes a fast blink for UI feedback if the same weapon is
+    // selected, or the TG2 weapon is selected.
+    ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1));
+    ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT - LED2));
+    ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT - LED3));
+    ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT - LED4));
+    ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5));
+    
+    if (!Throttle[PSB])
+    {
+        if (tg1_weapon == SC_WEAPON_GROUP_1)
+            ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1));
+        else if (tg1_weapon == SC_WEAPON_GROUP_2)
+            ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED2));
+        else if (tg1_weapon == SC_WEAPON_GROUP_3)
+            ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED3));
+        else if (tg1_weapon == SC_WEAPON_GROUP_4)
+            ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED4));
     }
-    else {
+    else
+    {
+        if (tg2_weapon == SC_WEAPON_GROUP_1)
+            ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1));
+        else if (tg2_weapon == SC_WEAPON_GROUP_2)
+            ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED2));
+        else if (tg2_weapon == SC_WEAPON_GROUP_3)
+            ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED3));
+        else if (tg2_weapon == SC_WEAPON_GROUP_4)
+            ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED4));
+    }
+}
+
+int power_selector()
+{
+    if (Throttle[EACON])
+    {
+        // Power Management
+        if (Joystick[H3U]) ActKey(KEYON + SC_POWER_GROUP_RESET); else ActKey(SC_POWER_GROUP_RESET);
+        if (Joystick[H3D]) ActKey(KEYON + SC_POWER_GROUP_3); else ActKey(SC_POWER_GROUP_3);
+        if (Joystick[H3L]) ActKey(KEYON + SC_POWER_GROUP_1); else ActKey(SC_POWER_GROUP_1);
+        if (Joystick[H3R]) ActKey(KEYON + SC_POWER_GROUP_2); else ActKey(SC_POWER_GROUP_2);
+    }
+    else
+    {
         // Missile Management
         // if (Joystick[H3U]) ActKey(KEYON+DX11); else ActKey(DX11); // Dynamic Focus
         // if (Joystick[H3D]) ActKey(KEYON+DX13); else ActKey(DX13);
-        if (Joystick[H3L]) ActKey(KEYON+SC_MISSILE_CYCLE_BACK); else ActKey(SC_MISSILE_CYCLE_BACK);
-        if (Joystick[H3R]) ActKey(KEYON+SC_MISSILE_CYCLE_FWD); else ActKey(SC_MISSILE_CYCLE_FWD);
+        if (Joystick[H3L]) ActKey(KEYON + SC_MISSILE_CYCLE_BACK); else ActKey(SC_MISSILE_CYCLE_BACK);
+        if (Joystick[H3R]) ActKey(KEYON + SC_MISSILE_CYCLE_FWD); else ActKey(SC_MISSILE_CYCLE_FWD);
     }
 }
