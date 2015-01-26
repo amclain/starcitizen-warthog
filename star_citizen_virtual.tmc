@@ -23,11 +23,6 @@
 // -----------------------------------------------------------------------------
 
 
-// TODO: Make trim hat a weapon selector.
-//       Short tap up/down/left/right sets TG1 to weapon 1/2/3/4.
-//       Long tap sets TG2 to weapon.
-//       Throttle LED shows TG1 current weapon.
-
 // TODO: Change S1 IFCS
 //       Short = cronstab toggle
 //       Long  = gsafe toggle
@@ -227,8 +222,8 @@ int main()
     ));
     
     // Reevaluate logic when pinky switch changes state.
-    MapKey(&Throttle, PSM, EXEC("update_leds(); weapon_selector();"));
-    MapKey(&Throttle, PSB, EXEC("update_leds(); weapon_selector();"));
+    MapKey(&Throttle, PSM, EXEC("swap_weapons();"));
+    MapKey(&Throttle, PSB, EXEC("swap_weapons();"));
     
     MapKey(&Joystick, H4P, SC_WEAPON_GROUP_3);
     
@@ -451,7 +446,12 @@ int EventHandle(int type, alias o, int x)
 
 int set_tg1_weapon(int weapon)
 {
-    if (Joystick[TG1] & (tg1_weapon != weapon)) ActKey(tg1_weapon);
+    // TODO: Bug:
+    //          When TG1 = TG2. Both active:
+    //              Moving TG1 or TG2 causes the opposite to deactivate.
+    // if (Joystick[TG1] & (tg1_weapon != weapon)) ActKey(tg1_weapon);
+    
+    if (Joystick[TG1]) ActKey(tg1_weapon);
     tg1_weapon = weapon;
     if (Joystick[TG1]) ActKey(KEYON + tg1_weapon);
     update_leds();
@@ -465,27 +465,20 @@ int set_tg2_weapon(int weapon)
     update_leds();
 }
 
+int swap_weapons()
+{
+    int temp_weapon = tg1_weapon;
+    tg1_weapon = tg2_weapon;
+    tg2_weapon = temp_weapon;
+    update_leds();
+    weapon_selector();
+}
+
 int weapon_selector() {
-    if (Throttle[PSB])
-    {
-        // Inverted
-        
-        // TODO: Fix hat logic when weapons are in inverted mode.
-        //       Doesn't fire when TG1 and TG2 are the same weapon.
-        //       Button jams on when switching weapon while firing.
-        if (tg1_weapon != tg2_weapon)
-            if (Joystick[TG1]) ActKey(KEYON + tg2_weapon); else ActKey(tg2_weapon);
-        
-        if (Joystick[TG2]) ActKey(KEYON + tg1_weapon); else ActKey(tg1_weapon);
-    }
-    else
-    {
-        // Normal
-        if (Joystick[TG1]) ActKey(KEYON + tg1_weapon); else ActKey(tg1_weapon);
-        
-        if (tg1_weapon != tg2_weapon)
-            if (Joystick[TG2]) ActKey(KEYON + tg2_weapon); else ActKey(tg2_weapon);
-    }
+    if (Joystick[TG1]) ActKey(KEYON + tg1_weapon); else ActKey(tg1_weapon);
+    
+    if (tg1_weapon != tg2_weapon)
+        if (Joystick[TG2]) ActKey(KEYON + tg2_weapon); else ActKey(tg2_weapon);
 }
 
 int update_leds()
@@ -499,28 +492,14 @@ int update_leds()
     ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT - LED4));
     ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5));
     
-    if (!Throttle[PSB])
-    {
-        if (tg1_weapon == SC_WEAPON_GROUP_1)
-            ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1));
-        else if (tg1_weapon == SC_WEAPON_GROUP_2)
-            ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED2));
-        else if (tg1_weapon == SC_WEAPON_GROUP_3)
-            ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED3));
-        else if (tg1_weapon == SC_WEAPON_GROUP_4)
-            ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED4));
-    }
-    else
-    {
-        if (tg2_weapon == SC_WEAPON_GROUP_1)
-            ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1));
-        else if (tg2_weapon == SC_WEAPON_GROUP_2)
-            ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED2));
-        else if (tg2_weapon == SC_WEAPON_GROUP_3)
-            ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED3));
-        else if (tg2_weapon == SC_WEAPON_GROUP_4)
-            ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED4));
-    }
+    if (tg1_weapon == SC_WEAPON_GROUP_1)
+        ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1));
+    else if (tg1_weapon == SC_WEAPON_GROUP_2)
+        ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED2));
+    else if (tg1_weapon == SC_WEAPON_GROUP_3)
+        ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED3));
+    else if (tg1_weapon == SC_WEAPON_GROUP_4)
+        ActKey(PULSE + KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED4));
 }
 
 int power_selector()
