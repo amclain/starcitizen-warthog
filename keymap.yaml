@@ -1,0 +1,34 @@
+- { tmc: SC_ROLL_AXIS,                dx: DX_X_AXIS,        xml: v_roll,                            input: js3_x        }
+- { tmc: SC_PITCH_AXIS,               dx: DX_Y_AXIS,        xml: v_pitch,                           input: js3_y        }
+- { tmc: SC_THROTTLE_AXIS,            dx: DX_THROTTLE_AXIS, xml: v_throttle_abs,                    input: js3_slider1  }
+- { tmc: SC_WEAPON_GROUP_1,           dx: DX1,              xml: v_attack1_group1,                  input: js3_button1  }
+- { tmc: SC_WEAPON_GROUP_2,           dx: DX6,              xml: v_attack1_group2,                  input: js3_button6  }
+- { tmc: SC_WEAPON_GROUP_3,           dx: DX3,              xml: v_attack1_group3,                  input: js3_button3  }
+- { tmc: SC_WEAPON_GROUP_4,           dx: DX13,             xml: v_attack1_group4,                  input: js3_button13 }
+- { tmc: SC_LAUNCH_MISSILE,           dx: DX2,              xml: v_weapon_launch_missile,           input: js3_button2  }
+- { tmc: SC_IFCS_TOGGLE,              dx: DX5,              xml: v_ifcs_toggle_safeties,            input: js3_button5  }
+- { tmc: SC_LAUNCH_COUNTERMEASURE,    dx: DX15,             xml: v_weapon_launch_countermeasure,    input: js3_button15 }
+- { tmc: SC_SCOREBOARD,               dx: DX4,              xml: v_hud_open_scoreboard,             input: js3_button4  }
+- { tmc: SC_TARGET_NEAREST_HOSTILE,   dx: DX7,              xml: v_target_nearest_hostile,          input: js3_button7  }
+- { tmc: SC_TARGET_HOSTILE_FWD,       dx: DX9,              xml: v_target_cycle_hostile_fwd,        input: js3_button9  }
+- { tmc: SC_PIN_FOCUSED_TARGET,       dx: DX11,             xml: v_target_toggle_pinned_focused,    input: js3_button11 }
+- { tmc: SC_TARGET_ALL_FWD,           dx: DX8,              xml: v_target_cycle_pinned_fwd,         input: js3_button8  }
+- { tmc: SC_TARGET_ALL_BACK,          dx: DX10,             xml: v_target_cycle_friendly_fwd,       input: js3_button10 }
+- { tmc: SC_MISSILE_CYCLE_FWD,        dx: DX12,             xml: v_weapon_cycle_missile_fwd,        input: js3_button12 }
+- { tmc: SC_MISSILE_CYCLE_BACK,       dx: DX14,             xml: v_weapon_cycle_missile_back,       input: js3_button14 }
+- { tmc: SC_RADAR_ZOOM,               dx: DX18,             xml: v_radar_cycle_zoom_fwd,            input: js3_button18 }
+- { tmc: SC_COUNTERMEASURE_CYCLE_FWD, dx: DX17,             xml: v_weapon_cycle_countermeasure_fwd, input: js3_button17 }
+- { tmc: SC_SHIELD_FWD,               dx: DX22,             xml: v_shield_raise_level_forward,      input: js3_button23 }
+- { tmc: SC_SHIELD_AFT,               dx: DX24,             xml: v_shield_raise_level_back,         input: js3_button25 }
+- { tmc: SC_SHIELD_LEFT,              dx: DX25,             xml: v_shield_raise_level_left,         input: js3_button22 }
+- { tmc: SC_SHIELD_RIGHT,             dx: DX23,             xml: v_shield_raise_level_right,        input: js3_button24 }
+- { tmc: SC_SHIELD_RESET,             dx: DX26,             xml: v_shield_reset_level,              input: js3_button26 }
+- { tmc: SC_BRAKE,                    dx: DX20,             xml: v_brake,                           input: js3_button20 }
+- { tmc: SC_AFTERBURNER,              dx: DX32,             xml: v_afterburner,                     input: js3_button32 }
+- { tmc: SC_IFCS_DECOUPLE,            dx: DX21,             xml: v_ifcs_toggle_vector_decoupling,   input: js3_button21 }
+- { tmc: SC_EJECT,                    dx: DX30,             xml: v_eject,                           input: js3_button30 }
+- { xml: v_decoupled_pitch, input: js3_y }
+- { xml: v_decoupled_roll,  input: js3_x }
+- { xml: v_decoupled_brake, input: js3_button20 }
+- { xml: v_afterburner,     input: js3_button32 }
+- { xml: v_target_missile_lock_focused, input: js3_button2 }

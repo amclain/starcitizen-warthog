@@ -10,5 +10,9 @@ and [Cougar MFDs](http://www.thrustmaster.com/en_US/products/hotas-cougar).
 ## Use
 
 ```text
-pp_rebindkeys warthog_virtual.xml
+pp_RebindKeys warthog_virtual.xml
 ```
+
+Other commands:
+`i_DumpDeviceInformation`
+`pp_ResortDevices`
