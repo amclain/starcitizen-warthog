@@ -2,7 +2,7 @@
 
 all_dx_buttons = (1..32).map { |i| i }
 
-source_code = File.open('../star_citizen_virtual.tmc', 'r').read
+source_code = File.open('../star_citizen.tmc', 'r').read
 used_dx_buttons = source_code.scan(/define\s+\w+\s+DX(\d+)/).flatten.map(&:to_i).sort
 unused_dx_buttons = all_dx_buttons - used_dx_buttons
 

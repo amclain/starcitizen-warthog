@@ -16,7 +16,7 @@ and [Cougar MFDs](http://www.thrustmaster.com/en_US/products/hotas-cougar).
 ## Use
 
 ```text
-pp_RebindKeys warthog_virtual.xml
+pp_RebindKeys layout_starcitizen_warthog
 ```
 
 Other commands:
