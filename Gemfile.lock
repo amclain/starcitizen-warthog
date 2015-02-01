@@ -1,0 +1,14 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    rake (10.4.2)
+    rubyzip (1.1.6)
+    starcitizen-tools (0.1.0)
+      rake (~> 10.4)
+      rubyzip (~> 1.1)
+
+PLATFORMS
+  x64-mingw32
+
+DEPENDENCIES
+  starcitizen-tools (~> 0.1)
