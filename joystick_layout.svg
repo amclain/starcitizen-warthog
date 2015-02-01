@@ -4826,7 +4826,7 @@ PB1RV13swPB1Kuu+Df8AM/tq6750/mmr703lJMOKMAHpYGg+NDtTD/nSWZ+mw/8A1oH/2Q==" transf
 		c0-0.615,0.25-1.116,0.754-1.508C289.07,532.722,289.712,532.525,290.521,532.525z"/>
 	
 		<line fill="none" stroke="#000000" stroke-width="0.7199" stroke-miterlimit="10" x1="246.876" y1="563.066" x2="347.917" y2="563.066"/>
-	<text transform="matrix(1 0 0 1 253.1338 557.7017)" font-family="'MicrosoftSansSerif'" font-size="10.2827">Decoupled ModeX</text>
+	<text transform="matrix(1 0 0 1 253.1338 557.7017)" font-family="'MicrosoftSansSerif'" font-size="10.2827"></text>
 	
 		<line fill="none" stroke="#000000" stroke-width="0.7199" stroke-miterlimit="10" x1="246.876" y1="580.951" x2="347.917" y2="580.951"/>
 	<path d="M301.645,568.069h1.34l2.097,3.326l2.096-3.326h1.34l-2.85,4.304v3.129h-1.174v-3.129L301.645,568.069z M298.039,567.956
@@ -4845,7 +4845,7 @@ PB1RV13swPB1Kuu+Df8AM/tq6750/mmr703lJMOKMAHpYGg+NDtTD/nSWZ+mw/8A1oH/2Q==" transf
 		c-0.391-0.306-0.585-0.753-0.585-1.313c0-0.614,0.25-1.117,0.754-1.508C289.07,568.152,289.712,567.956,290.521,567.956z"/>
 	
 		<line fill="none" stroke="#000000" stroke-width="0.7199" stroke-miterlimit="10" x1="246.876" y1="598.388" x2="347.917" y2="598.388"/>
-	<text transform="matrix(1 0 0 1 253.1338 593.021)" font-family="'MicrosoftSansSerif'" font-size="10.2827">Decoupled ModeY</text>
+	<text transform="matrix(1 0 0 1 253.1338 593.021)" font-family="'MicrosoftSansSerif'" font-size="10.2827"></text>
 	
 		<line fill="none" stroke="#000000" stroke-width="0.7199" stroke-miterlimit="10" x1="476.089" y1="869.368" x2="476.089" y2="904.065"/>
 	
