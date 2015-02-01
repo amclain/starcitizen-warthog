@@ -1,0 +1,41 @@
+
+JOYX: Roll
+JOYY: Pitch
+THR_RIGHT: Throttle
+TG1: Selected Weapon 1
+TG2: Selected Weapon 2
+S1: IFCS Toggle
+S2: Fire Missile
+S3: Launch Countermeasure
+S4: Score Board
+H1U: Weapon 1 on TG1
+H1D: Weapon 2 on TG1
+H1L: Weapon 3 on TG1
+H1R: Weapon 4 on TG1
+H2U: Nearest Hostile
+H2D: Cycle All
+H2L: Cycle Friendly
+H2R: Cycle Pinned
+H3U: 
+H3D: 
+H3L: Cycle Missile Fwd
+H3R: Cycle Missile Back
+H4U: Launch Countermeasure
+H4D: Cycle Countermeasure
+H4L: 
+H4R: Radar Zoom
+SC: Decoupled Mode
+CSU: UI Overview
+CSL: UI Weapons
+CSR: UI Power
+CSD: UI Shields
+MSP: Reset Shields
+MSU: Shields Left
+MSD: Shields Right
+MSL: Shields Aft
+MSR: Shields Fwd
+SPDF: Afterburner
+SPDB: Brake
+CHF: Center Aim
+PSB: Swap TG1/TG2
+LDGH: Eject
