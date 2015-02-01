@@ -3,8 +3,8 @@
     Designed to be used with star_citizen_virtual.tmc
     Binding Names: http://www.starcitizen-sgc.com/scdefaultprofile
 -->
-<ActionMaps version="0">
-    <CustomisationUIHeader device="joystick" label="JoystickTMWarthog" description="@ui_JoystickTMWarthogDesc" image="JoystickTMWarthog" />
+<ActionMaps version="1">
+    <CustomisationUIHeader device="joystick" label="JoystickWarthogVirtual" description="@ui_JoystickTMWarthogDesc" image="JoystickTMWarthog" />
     
     <deviceoptions name="Joystick - HOTAS Warthog">
         <!-- Reduce the deadzone -->
