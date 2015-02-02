@@ -37,5 +37,6 @@ MSR: Shields Fwd
 SPDF: Afterburner
 SPDB: Brake
 CHF: Center Aim
-PSB: Swap TG1/TG2
+PSM: TG1/TG2 Normal
+PSB: TG1/TG2 Swapped
 LDGH: Eject

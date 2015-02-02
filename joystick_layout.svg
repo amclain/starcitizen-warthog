@@ -4664,7 +4664,7 @@ PB1RV13swPB1Kuu+Df8AM/tq6750/mmr703lJMOKMAHpYGg+NDtTD/nSWZ+mw/8A1oH/2Q==" transf
 		c-0.192-0.054-0.493-0.054-0.903-0.054H517.211z"/>
 	
 		<line fill="none" stroke="#000000" stroke-width="0.7199" stroke-miterlimit="10" x1="476.854" y1="766.67" x2="576.058" y2="766.67"/>
-	<text transform="matrix(1 0 0 1 483.001 761.4004)" font-family="'MicrosoftSansSerif'" font-size="10.0957"></text>
+	<text transform="matrix(1 0 0 1 483.001 761.4004)" font-family="'MicrosoftSansSerif'" font-size="10.0957">TG1/TG2 Normal</text>
 	
 		<line fill="none" stroke="#000000" stroke-width="0.7199" stroke-miterlimit="10" x1="476.854" y1="784.227" x2="576.058" y2="784.227"/>
 	<path d="M530.955,771.58h2.634c0.796,0,1.399,0.191,1.865,0.522c0.439,0.329,0.687,0.795,0.687,1.398
@@ -4687,7 +4687,7 @@ PB1RV13swPB1Kuu+Df8AM/tq6750/mmr703lJMOKMAHpYGg+NDtTD/nSWZ+mw/8A1oH/2Q==" transf
 		c-0.192-0.054-0.494-0.083-0.906-0.083H518.445z"/>
 	
 		<line fill="none" stroke="#000000" stroke-width="0.7199" stroke-miterlimit="10" x1="476.854" y1="801.345" x2="576.058" y2="801.345"/>
-	<text transform="matrix(1 0 0 1 483.001 796.0776)" font-family="'MicrosoftSansSerif'" font-size="10.0957">Swap TG1/TG2</text>
+	<text transform="matrix(1 0 0 1 483.001 796.0776)" font-family="'MicrosoftSansSerif'" font-size="10.0957">TG1/TG2 Swapped</text>
 	
 		<line fill="none" stroke="#000000" stroke-width="0.7199" stroke-miterlimit="10" x1="475.613" y1="622.105" x2="475.613" y2="658.636"/>
 	
