@@ -22,6 +22,10 @@ StarCitizenWarthog::Rake::GenerateKeymap.new
 task :install do
   require 'starcitizen-tools'
   require 'fileutils'
-  FileUtils.cp 'layout_starcitizen_warthog.xml',
-    File.expand_path('CitizenClient\USER\Controls\Mappings', StarCitizen::Config.game_path)
+  
+  mappings_path = File.expand_path 'CitizenClient\USER\Controls\Mappings', 
+    StarCitizen::Config.game_path
+  
+  FileUtils.mkdir_p mappings_path
+  FileUtils.cp 'layout_starcitizen_warthog.xml', mappings_path
 end

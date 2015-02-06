@@ -23,10 +23,6 @@
 // -----------------------------------------------------------------------------
 
 
-// TODO: Change S1 IFCS
-//       Short = cronstab toggle
-//       Long  = gsafe toggle
-
 // TODO: Voice Attack on throttle left button
 //          OR
 //       Remap mic switch to comms and move shields (to CMS?).
@@ -66,7 +62,8 @@ define SC_WEAPON_GROUP_2                DX6
 define SC_WEAPON_GROUP_3                DX3
 define SC_WEAPON_GROUP_4                DX13 // TODO: Add to XML
 define SC_LAUNCH_MISSILE                DX2
-define SC_IFCS_TOGGLE                   DX5
+define SC_COMSTAB_TOGGLE                DX5
+define SC_GSAFE_TOGGLE                  DX16
 define SC_LAUNCH_COUNTERMEASURE         DX15
 define SC_SCOREBOARD                    DX4
 define SC_TARGET_NEAREST_HOSTILE        DX7
@@ -228,8 +225,11 @@ int main()
     MapKey(&Joystick, H4P, SC_WEAPON_GROUP_3);
     
     // MMCB
-    MapKey(&Joystick, S1, SC_IFCS_TOGGLE); // Short
-    // MapKey(&Joystick, S1, SC_USE_DOCKING); // Long
+    MapKey(&Joystick, S1, TEMPO(
+        SC_COMSTAB_TOGGLE, // Short
+        SC_GSAFE_TOGGLE,   // Long
+        long_delay_amount
+    )); 
     
     // Weapon Release
     MapKey(&Joystick, S2, SC_LAUNCH_MISSILE);

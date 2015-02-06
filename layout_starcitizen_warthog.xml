@@ -674,13 +674,13 @@
             <rebind device='joystick' input=' '/>
         </action>
         <action name='v_ifcs_toggle_safeties'>
-            <rebind device='joystick' input='js3_button5'/>
+            <rebind device='joystick' input=' '/>
         </action>
         <action name='v_ifcs_toggle_gforce_safety'>
-            <rebind device='joystick' input=' '/>
+            <rebind device='joystick' input='js3_button16'/>
         </action>
         <action name='v_ifcs_toggle_comstab'>
-            <rebind device='joystick' input=' '/>
+            <rebind device='joystick' input='js3_button5'/>
         </action>
         <action name='v_decoupled_strafe_up'>
             <rebind device='joystick' input=' '/>
