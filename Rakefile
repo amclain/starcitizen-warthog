@@ -23,5 +23,5 @@ task :install do
   require 'starcitizen-tools'
   require 'fileutils'
   FileUtils.cp 'layout_starcitizen_warthog.xml',
-    File.expand_path('CitizenClient\Data\Controls\Mappings', StarCitizen::Config.game_path)
+    File.expand_path('CitizenClient\USER\Controls\Mappings', StarCitizen::Config.game_path)
 end
