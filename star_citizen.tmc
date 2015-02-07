@@ -88,6 +88,7 @@ define SC_STRAFE_DOWN                   DX27
 define SC_STRAFE_LEFT                   DX28
 define SC_STRAFE_RIGHT                  DX29
 define SC_AIM_RESET                     USB_RIGHT_SHIFT
+define SC_GIMBAL_LOCK                   USB_LEFT_ALT
 define SC_HUD_OVERVIEW                  USB_F1
 define SC_HUD_WEAPONS                   USB_F2
 define SC_HUD_POWER                     USB_F3
@@ -323,7 +324,7 @@ int main()
     
     // China Hat
     MapKey(&Throttle, CHF, SC_AIM_RESET);
-    MapKey(&Throttle, CHB, SC_SHIELD_RESET);
+    MapKey(&Throttle, CHB, SC_GIMBAL_LOCK);
     
     // Left Throttle Button
     MapKey(&Throttle, LTB, VOICE_ATTACK);
