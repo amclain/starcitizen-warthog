@@ -55,7 +55,7 @@ define SC_THROTTLE_AXIS                 DX_THROTTLE_AXIS
 define SC_WEAPON_GROUP_1                DX1
 define SC_WEAPON_GROUP_2                DX6
 define SC_WEAPON_GROUP_3                DX3
-define SC_WEAPON_GROUP_4                DX13 // TODO: Add to XML
+define SC_WEAPON_GROUP_4                DX13
 define SC_LAUNCH_MISSILE                DX2
 define SC_IFCS_TOGGLE                   DX5
 // define SC_COMSTAB_TOGGLE                DX5
@@ -109,14 +109,16 @@ define SC_HUD_TAB_8                     USB_F8
 define SC_HUD_TAB_9                     USB_F9
 define SC_HUD_TAB_10                    USB_F10
 define SC_HUD_MAXIMIZE                  USB_F11
+define SC_HUD_INTERACT                  USB_HOME
 define SC_HUD_CONFIRM                   USB_RETURN
+define SC_HUD_CANCEL                    USB_RIGHT_CONTROL
 define SC_HUD_LEFT_PANEL_UP             USB_UP_ARROW
 define SC_HUD_LEFT_PANEL_DOWN           USB_DOWN_ARROW
 define SC_HUD_LEFT_PANEL_LEFT           USB_LEFT_ARROW
 define SC_HUD_LEFT_PANEL_RIGHT          USB_RIGHT_ARROW
 define SC_HUD_MODE_FWD                  USB_SEMICOLON
 define SC_HUD_MODE_BACK                 USB_APOSTROPHE
-define VOICE_ATTACK                     L_ALT + USB_F2
+define VOICE_ATTACK                     L_ALT + USB_F2 // TODO: Remap out of HUD menu range.
 
 define LED_INTENSITY_LEVEL_0            0
 define LED_INTENSITY_LEVEL_1            43
@@ -166,12 +168,6 @@ int main()
     MapAxis(&Throttle, SCY, DX_YROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
     SetSCurve(&Throttle, SCY, 0, 0, 0, strafe_y_curve, 0);
     
-    // TODO: Slew Control - Aim
-    // MapAxis(&Throttle, SCX, DX_Z_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
-    // SetSCurve(&Throttle, SCX, 0, 0, 0, aim_x_curve, 0);
-    // MapAxis(&Throttle, SCY, DX_ZROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
-    // SetSCurve(&Throttle, SCY, 0, 0, 0, aim_y_curve, 0);
-    
     // ----------------
     // Joystick Buttons
     // ----------------
@@ -184,7 +180,7 @@ int main()
     //       H1L - Weapon Group 3
     //       H1R - Weapon Group 4
     // Swappable with pinky switch. --------------------------------------------
-    //       FWD - TODO: Expose group 3/4?
+    //       FWD - 
     //       MID - Normal:   TG1=Group1, TG2=Group2
     //       AFT - Reversed: TG1=Group2, TG2=Group1
     // -------------------------------------------------------------------------
@@ -382,7 +378,7 @@ int main()
     MapKey(&RMFD, OSB04, SC_HUD_TAB_4);
     MapKey(&RMFD, OSB05, SC_HUD_TAB_5);
     
-    // MapKey(&RMFD, OSB06, HUD_CANCEL);
+    MapKey(&RMFD, OSB06, SC_HUD_CANCEL);
     // MapKey(&RMFD, OSB07, );
     MapKey(&RMFD, OSB08, SC_HUD_MAXIMIZE);
     // MapKey(&RMFD, OSB09, );
@@ -396,7 +392,7 @@ int main()
     
     MapKey(&RMFD, OSB16, SC_SCOREBOARD);
     // MapKey(&RMFD, OSB17, );
-    // MapKey(&RMFD, OSB18, HUD_INTERACT);
+    MapKey(&RMFD, OSB18, SC_HUD_INTERACT);
     // MapKey(&RMFD, OSB19, );
     MapKey(&RMFD, OSB20, SC_HUD_CONFIRM);
     
