@@ -72,7 +72,7 @@ define SC_MISSILE_CYCLE_BACK            DX14
 define SC_POWER_GROUP_1                 USB_1
 define SC_POWER_GROUP_2                 USB_2
 define SC_POWER_GROUP_3                 USB_3
-define SC_POWER_GROUP_RESET             USB_4
+define SC_POWER_GROUP_RESET             USB_0
 define SC_RADAR_ZOOM                    DX18
 define SC_COUNTERMEASURE_CYCLE_FWD      DX17
 define SC_SHIELD_FWD                    DX22
