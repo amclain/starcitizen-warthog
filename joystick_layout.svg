@@ -4591,7 +4591,7 @@ PB1RV13swPB1Kuu+Df8AM/tq6750/mmr703lJMOKMAHpYGg+NDtTD/nSWZ+mw/8A1oH/2Q==" transf
 		c-0.598-0.678-0.896-1.574-0.896-2.716c0-1.14,0.299-2.066,0.896-2.745C252.885,901.28,253.699,900.928,254.731,900.928z"/>
 	
 		<line fill="none" stroke="#000000" stroke-width="0.7199" stroke-miterlimit="10" x1="211.318" y1="930.647" x2="309.988" y2="930.647"/>
-	<text transform="matrix(1 0 0 1 217.8389 925.4307)" font-family="'MicrosoftSansSerif'" font-size="9.9972">Center Aim</text>
+	<text transform="matrix(1 0 0 1 217.8389 925.4307)" font-family="'MicrosoftSansSerif'" font-size="9.9972">Center TrackIR</text>
 	
 		<line fill="none" stroke="#000000" stroke-width="0.7199" stroke-miterlimit="10" x1="211.318" y1="947.603" x2="309.988" y2="947.603"/>
 	<path d="M263.806,935.482h1.575l1.848,5.869l1.847-5.869h1.55v7.257h-1.062v-6.005l-1.847,6.005h-0.979l-1.848-6.005v6.005h-1.085

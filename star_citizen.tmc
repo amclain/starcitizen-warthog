@@ -119,6 +119,7 @@ define SC_HUD_LEFT_PANEL_RIGHT          USB_RIGHT_ARROW
 define SC_HUD_MODE_FWD                  USB_SEMICOLON
 define SC_HUD_MODE_BACK                 USB_APOSTROPHE
 define VOICE_ATTACK                     L_ALT + USB_F2 // TODO: Remap out of HUD menu range.
+define TRACKIR_CENTER                   USB_F12
 
 define LED_INTENSITY_LEVEL_0            0
 define LED_INTENSITY_LEVEL_1            43
@@ -319,7 +320,7 @@ int main()
     MapKey(&Throttle, SPDB, SC_BRAKE);
     
     // China Hat
-    MapKey(&Throttle, CHF, SC_AIM_RESET);
+    MapKey(&Throttle, CHF, TRACKIR_CENTER);
     MapKey(&Throttle, CHB, SC_GIMBAL_LOCK);
     
     // Left Throttle Button
@@ -378,11 +379,11 @@ int main()
     MapKey(&RMFD, OSB04, SC_HUD_TAB_4);
     MapKey(&RMFD, OSB05, SC_HUD_TAB_5);
     
-    MapKey(&RMFD, OSB06, SC_HUD_CANCEL);
-    // MapKey(&RMFD, OSB07, );
-    MapKey(&RMFD, OSB08, SC_HUD_MAXIMIZE);
-    // MapKey(&RMFD, OSB09, );
-    // MapKey(&RMFD, OSB10, );
+    MapKey(&RMFD, OSB06, SC_HUD_CONFIRM);
+    MapKey(&RMFD, OSB07, SC_HUD_CANCEL);
+    // MapKey(&RMFD, OSB08, );
+    MapKey(&RMFD, OSB09, SC_HUD_MAXIMIZE);
+    MapKey(&RMFD, OSB10, SC_HUD_INTERACT);
     
     MapKey(&RMFD, OSB11, SC_HUD_TAB_10);
     MapKey(&RMFD, OSB12, SC_HUD_TAB_9);
@@ -392,9 +393,9 @@ int main()
     
     MapKey(&RMFD, OSB16, SC_SCOREBOARD);
     // MapKey(&RMFD, OSB17, );
-    MapKey(&RMFD, OSB18, SC_HUD_INTERACT);
-    // MapKey(&RMFD, OSB19, );
-    MapKey(&RMFD, OSB20, SC_HUD_CONFIRM);
+    MapKey(&RMFD, OSB18, SC_GIMBAL_LOCK);
+    MapKey(&RMFD, OSB19, SC_AIM_RESET);
+    MapKey(&RMFD, OSB20, TRACKIR_CENTER);
     
     MapKey(&RMFD, SYMU,  SC_HUD_LEFT_PANEL_UP);
     MapKey(&RMFD, SYMD,  SC_HUD_LEFT_PANEL_DOWN);
