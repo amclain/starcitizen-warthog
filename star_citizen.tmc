@@ -500,7 +500,8 @@ int coolie_hat_selector()
         if (Throttle[CSL]) ActKey(KEYON + SC_STRAFE_LEFT); else ActKey(SC_STRAFE_LEFT);
         if (Throttle[CSR]) ActKey(KEYON + SC_STRAFE_RIGHT); else ActKey(SC_STRAFE_RIGHT);
     }
-    else if (Throttle[BSM])
+    else if (Throttle[BSB]) {}
+    else
     {
         // HUD Menu Selector
         if (Throttle[CSU]) ActKey(KEYON + SC_HUD_OVERVIEW); else ActKey(SC_HUD_OVERVIEW);
