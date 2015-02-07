@@ -26,6 +26,14 @@
 - { tmc: SC_SHIELD_RESET,             dx: DX26,             xml: v_shield_reset_level,              input: js3_button26 }
 - { tmc: SC_BRAKE,                    dx: DX20,             xml: v_brake,                           input: js3_button20 }
 - { tmc: SC_AFTERBURNER,              dx: DX32,             xml: v_afterburner,                     input: js3_button32 }
+- { tmc: SC_STRAFE_UP,                dx: DX19,             xml: v_strafe_up,                       input: js3_button19 }
+- { tmc: SC_STRAFE_DOWN,              dx: DX27,             xml: v_strafe_down,                     input: js3_button27 }
+- { tmc: SC_STRAFE_LEFT,              dx: DX28,             xml: v_strafe_left,                     input: js3_button28 }
+- { tmc: SC_STRAFE_RIGHT,             dx: DX29,             xml: v_strafe_right,                    input: js3_button29 }
+- { tmc: SC_STRAFE_UP,                dx: DX19,             xml: v_decoupled_strafe_up,             input: js3_button19 }
+- { tmc: SC_STRAFE_DOWN,              dx: DX27,             xml: v_decoupled_strafe_down,           input: js3_button27 }
+- { tmc: SC_STRAFE_LEFT,              dx: DX28,             xml: v_decoupled_strafe_left,           input: js3_button28 }
+- { tmc: SC_STRAFE_RIGHT,             dx: DX29,             xml: v_decoupled_strafe_right,          input: js3_button29 }
 - { tmc: SC_IFCS_DECOUPLE,            dx: DX21,             xml: v_ifcs_toggle_vector_decoupling,   input: js3_button21 }
 - { tmc: SC_EJECT,                    dx: DX30,             xml: v_eject,                           input: js3_button30 }
 - { xml: v_decoupled_pitch, input: js3_y }

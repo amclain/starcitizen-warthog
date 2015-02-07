@@ -647,19 +647,19 @@
             <rebind device='joystick' input='js3_button21'/>
         </action>
         <action name='v_strafe_up'>
-            <rebind device='joystick' input=' '/>
+            <rebind device='joystick' input='js3_button19'/>
         </action>
         <action name='v_strafe_down'>
-            <rebind device='joystick' input=' '/>
+            <rebind device='joystick' input='js3_button27'/>
         </action>
         <action name='v_strafe_vertical'>
             <rebind device='joystick' input=' '/>
         </action>
         <action name='v_strafe_left'>
-            <rebind device='joystick' input=' '/>
+            <rebind device='joystick' input='js3_button28'/>
         </action>
         <action name='v_strafe_right'>
-            <rebind device='joystick' input=' '/>
+            <rebind device='joystick' input='js3_button29'/>
         </action>
         <action name='v_strafe_lateral'>
             <rebind device='joystick' input=' '/>
@@ -683,19 +683,19 @@
             <rebind device='joystick' input='js3_button5'/>
         </action>
         <action name='v_decoupled_strafe_up'>
-            <rebind device='joystick' input=' '/>
+            <rebind device='joystick' input='js3_button19'/>
         </action>
         <action name='v_decoupled_strafe_down'>
-            <rebind device='joystick' input=' '/>
+            <rebind device='joystick' input='js3_button27'/>
         </action>
         <action name='v_decoupled_strafe_vertical'>
             <rebind device='joystick' input=' '/>
         </action>
         <action name='v_decoupled_strafe_left'>
-            <rebind device='joystick' input=' '/>
+            <rebind device='joystick' input='js3_button28'/>
         </action>
         <action name='v_decoupled_strafe_right'>
-            <rebind device='joystick' input=' '/>
+            <rebind device='joystick' input='js3_button29'/>
         </action>
         <action name='v_decoupled_strafe_lateral'>
             <rebind device='joystick' input=' '/>

@@ -29,9 +29,6 @@
 //       Mic push:
 //          Voice Attack
 
-// TODO: Boat switch changes coolie hat between UI selector (BSM) and
-//       strafing thrusters (BSF).
-
 
 // TARGET Script
 include "target.tmh"
@@ -86,6 +83,10 @@ define SC_SHIELD_RESET                  DX26
 define SC_SHIELD_BOOST_RECHARGE         USB_C
 define SC_BRAKE                         DX20
 define SC_AFTERBURNER                   DX32
+define SC_STRAFE_UP                     DX19
+define SC_STRAFE_DOWN                   DX27
+define SC_STRAFE_LEFT                   DX28
+define SC_STRAFE_RIGHT                  DX29
 define SC_AIM_RESET                     USB_RIGHT_SHIFT
 define SC_HUD_OVERVIEW                  USB_F1
 define SC_HUD_WEAPONS                   USB_F2
@@ -222,8 +223,6 @@ int main()
     MapKey(&Throttle, PSM, EXEC("swap_weapons();"));
     MapKey(&Throttle, PSB, EXEC("swap_weapons();"));
     
-    MapKey(&Joystick, H4P, SC_WEAPON_GROUP_3);
-    
     // MMCB
     // MapKey(&Joystick, S1, TEMPO(
     //     SC_COMSTAB_TOGGLE, // Short
@@ -293,10 +292,19 @@ int main()
     // ----------------
     
     // Coolie Hat
-    MapKey(&Throttle, CSU, SC_HUD_OVERVIEW);
-    MapKey(&Throttle, CSD, SC_HUD_SHIELDS);
-    MapKey(&Throttle, CSL, SC_HUD_WEAPONS);
-    MapKey(&Throttle, CSR, SC_HUD_POWER);
+    MapKey(&Throttle, CSU, EXEC("coolie_hat_selector();"));
+    MapKey(&Throttle, CSD, EXEC("coolie_hat_selector();"));
+    MapKey(&Throttle, CSL, EXEC("coolie_hat_selector();"));
+    MapKey(&Throttle, CSR, EXEC("coolie_hat_selector();"));
+    
+    MapKeyR(&Throttle, CSU, EXEC("coolie_hat_selector();"));
+    MapKeyR(&Throttle, CSD, EXEC("coolie_hat_selector();"));
+    MapKeyR(&Throttle, CSL, EXEC("coolie_hat_selector();"));
+    MapKeyR(&Throttle, CSR, EXEC("coolie_hat_selector();"));
+    
+    MapKey(&Throttle, BSF, EXEC("coolie_hat_mode_changed();"));
+    MapKey(&Throttle, BSM, EXEC("coolie_hat_mode_changed();"));
+    MapKey(&Throttle, BSB, EXEC("coolie_hat_mode_changed();"));
     
     // Mic Switch
     MapKey(&Throttle, MSU, SC_SHIELD_FWD);
@@ -307,68 +315,24 @@ int main()
     MapKey(&Throttle, MSP, SC_SHIELD_RESET);
     
     // Slew Control Button
-    // TODO: Modified by boat switch -------------------------------------------
-    //       FWD - Enable strafe in coupled mode
-    //       MID - Aiming reticule control
-    //       AFT - Decoupled mode control
-    // -------------------------------------------------------------------------
     MapKey(&Throttle, SC, SC_IFCS_DECOUPLE);
     
     // Speed SC_Brake
     MapKey(&Throttle, SPDF, SC_AFTERBURNER);
     MapKey(&Throttle, SPDB, SC_BRAKE);
     
-    // Boat Switch
-    // MapKey(&Throttle, BSF,       );
-    // MapKey(&Throttle, BSM,       );
-    // MapKey(&Throttle, BSB,       );
-    
     // China Hat
     MapKey(&Throttle, CHF, SC_AIM_RESET);
-    // MapKey(&Throttle, CHM,       );
     MapKey(&Throttle, CHB, SC_SHIELD_RESET);
     
     // Left Throttle Button
     MapKey(&Throttle, LTB, VOICE_ATTACK);
     
-    // MapKey(&Throttle, EFLNORM,   );
-    // MapKey(&Throttle, EFRNORM,   );
-    // MapKey(&Throttle, EOLMOTOR,  );
-    // MapKey(&Throttle, EORMOTOR,  );
-    // MapKey(&Throttle, APUON,     );
-    
     // Landing Gear Horn Silence
     MapKey(&Throttle, LDGH, SC_EJECT);
     
-    // Flaps
-    // MapKey(&Throttle, FLAPU,     );
-    // MapKey(&Throttle, FLAPM,     );
-    // MapKey(&Throttle, FLAPD,     );
-    
-    // MapKey(&Throttle, EACON,     );
-    // MapKey(&Throttle, RDRNRM,    );
-    
     // Autopilot Engage (Black Button On Base)
     MapKey(&Throttle, APENG, SC_USE_DOCKING);
-    
-    // MapKey(&Throttle, APPAT,     );
-    // MapKey(&Throttle, APAH,      );
-    // MapKey(&Throttle, APALT,     );
-    // MapKey(&Throttle, IDLERON,   );
-    // MapKey(&Throttle, IDLELON,   );
-    // MapKey(&Throttle, EOLIGN,    );
-    // MapKey(&Throttle, EORIGN,    );
-    
-    // MapKey(&Throttle, EFLOVER,   );
-    // MapKey(&Throttle, EFROVER,   );
-    // MapKey(&Throttle, APUOFF,    );
-    // MapKey(&Throttle, EACOFF,    );
-    // MapKey(&Throttle, RDRDIS,    );
-    // MapKey(&Throttle, APDIS,     );
-    // MapKey(&Throttle, IDLEROFF,  );
-    // MapKey(&Throttle, IDLELOFF,  );
-    // MapKey(&Throttle, EOLNORM,   );
-    // MapKey(&Throttle, EORNORM,   );
     
     // ----------------
     // Left MFD Buttons
@@ -526,4 +490,41 @@ int power_selector()
         if (Joystick[H3L]) ActKey(KEYON + SC_MISSILE_CYCLE_BACK); else ActKey(SC_MISSILE_CYCLE_BACK);
         if (Joystick[H3R]) ActKey(KEYON + SC_MISSILE_CYCLE_FWD); else ActKey(SC_MISSILE_CYCLE_FWD);
     }
+}
+
+int coolie_hat_selector()
+{
+    if (Throttle[BSF])
+    {
+        // Strafing
+        if (Throttle[CSU]) ActKey(KEYON + SC_STRAFE_UP); else ActKey(SC_STRAFE_UP);
+        if (Throttle[CSD]) ActKey(KEYON + SC_STRAFE_DOWN); else ActKey(SC_STRAFE_DOWN);
+        if (Throttle[CSL]) ActKey(KEYON + SC_STRAFE_LEFT); else ActKey(SC_STRAFE_LEFT);
+        if (Throttle[CSR]) ActKey(KEYON + SC_STRAFE_RIGHT); else ActKey(SC_STRAFE_RIGHT);
+    }
+    else if (Throttle[BSM])
+    {
+        // HUD Menu Selector
+        if (Throttle[CSU]) ActKey(KEYON + SC_HUD_OVERVIEW); else ActKey(SC_HUD_OVERVIEW);
+        if (Throttle[CSD]) ActKey(KEYON + SC_HUD_SHIELDS); else ActKey(SC_HUD_SHIELDS);
+        if (Throttle[CSL]) ActKey(KEYON + SC_HUD_WEAPONS); else ActKey(SC_HUD_WEAPONS);
+        if (Throttle[CSR]) ActKey(KEYON + SC_HUD_POWER); else ActKey(SC_HUD_POWER);
+    }
+}
+
+int coolie_hat_mode_changed()
+{
+    // Release keys.
+    ActKey(SC_STRAFE_UP);
+    ActKey(SC_STRAFE_DOWN);
+    ActKey(SC_STRAFE_LEFT);
+    ActKey(SC_STRAFE_RIGHT);
+    
+    ActKey(SC_HUD_OVERVIEW);
+    ActKey(SC_HUD_SHIELDS);
+    ActKey(SC_HUD_WEAPONS);
+    ActKey(SC_HUD_POWER);
+    
+    // Update active button.
+    coolie_hat_selector();
 }
