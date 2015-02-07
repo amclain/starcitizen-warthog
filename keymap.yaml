@@ -6,9 +6,9 @@
 - { tmc: SC_WEAPON_GROUP_3,           dx: DX3,              xml: v_attack1_group3,                  input: js3_button3  }
 - { tmc: SC_WEAPON_GROUP_4,           dx: DX13,             xml: v_attack1_group4,                  input: js3_button13 }
 - { tmc: SC_LAUNCH_MISSILE,           dx: DX2,              xml: v_weapon_launch_missile,           input: js3_button2  }
-- { tmc: SC_COMSTAB_TOGGLE,           dx: DX5,              xml: v_ifcs_toggle_comstab,             input: js3_button5  }
-- { tmc: SC_GSAFE_TOGGLE,             dx: DX5,              xml: v_ifcs_toggle_gforce_safety,       input: js3_button16 }
-- { tmc: SC_LAUNCH_COUNTERMEASURE,    dx: DX16,             xml: v_weapon_launch_countermeasure,    input: js3_button15 }
+- { tmc: SC_IFCS_TOGGLE,              dx: DX5,              xml: v_ifcs_toggle_comstab,             input: js3_button5  }
+- { tmc: SC_IFCS_TOGGLE,              dx: DX5,              xml: v_ifcs_toggle_gforce_safety,       input: js3_button5,   multiTap: 2 }
+- { tmc: SC_LAUNCH_COUNTERMEASURE,    dx: DX15,             xml: v_weapon_launch_countermeasure,    input: js3_button15 }
 - { tmc: SC_SCOREBOARD,               dx: DX4,              xml: v_hud_open_scoreboard,             input: js3_button4  }
 - { tmc: SC_TARGET_NEAREST_HOSTILE,   dx: DX7,              xml: v_target_nearest_hostile,          input: js3_button7  }
 - { tmc: SC_TARGET_HOSTILE_FWD,       dx: DX9,              xml: v_target_cycle_hostile_fwd,        input: js3_button9  }

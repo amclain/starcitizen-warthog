@@ -21,7 +21,7 @@ module StarCitizenWarthog
         
         task(name) do
           keymap = YAML.load_file('keymap.yaml')
-            .map { |e| [e['xml'], e['input']] }.to_h
+            .map { |e| [e['xml'], e] }.to_h
           
           remap_doc = REXML::Document.new
           
@@ -72,7 +72,9 @@ module StarCitizenWarthog
                   name = action.attributes['name']
                   attach_attributes a, name: name
                   a.add_element('rebind').tap do |r|
-                    attach_attributes r, device: 'joystick', input: keymap[name] || ' '
+                    keymap_item = keymap[name] || {}
+                    attach_attributes r, device: 'joystick', input: keymap_item['input'] || ' '
+                    r.attributes['multiTap'] = keymap_item['multiTap'] if keymap_item['multiTap']
                   end
                 end
               end

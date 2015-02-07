@@ -677,7 +677,7 @@
             <rebind device='joystick' input=' '/>
         </action>
         <action name='v_ifcs_toggle_gforce_safety'>
-            <rebind device='joystick' input='js3_button16'/>
+            <rebind device='joystick' input='js3_button5' multiTap='2'/>
         </action>
         <action name='v_ifcs_toggle_comstab'>
             <rebind device='joystick' input='js3_button5'/>

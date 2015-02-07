@@ -62,8 +62,9 @@ define SC_WEAPON_GROUP_2                DX6
 define SC_WEAPON_GROUP_3                DX3
 define SC_WEAPON_GROUP_4                DX13 // TODO: Add to XML
 define SC_LAUNCH_MISSILE                DX2
-define SC_COMSTAB_TOGGLE                DX5
-define SC_GSAFE_TOGGLE                  DX16
+define SC_IFCS_TOGGLE                   DX5
+// define SC_COMSTAB_TOGGLE                DX5
+// define SC_GSAFE_TOGGLE                  DX16
 define SC_LAUNCH_COUNTERMEASURE         DX15
 define SC_SCOREBOARD                    DX4
 define SC_TARGET_NEAREST_HOSTILE        DX7
@@ -225,11 +226,17 @@ int main()
     MapKey(&Joystick, H4P, SC_WEAPON_GROUP_3);
     
     // MMCB
-    MapKey(&Joystick, S1, TEMPO(
-        SC_COMSTAB_TOGGLE, // Short
-        SC_GSAFE_TOGGLE,   // Long
-        long_delay_amount
-    )); 
+    // MapKey(&Joystick, S1, TEMPO(
+    //     SC_COMSTAB_TOGGLE, // Short
+    //     SC_GSAFE_TOGGLE,   // Long
+    //     long_delay_amount
+    // )); 
+    // 
+    // Switched to single tap (Comstab) / double tap (GSafe) due to SC
+    // changing the button from toggle to momentary if it's held down.
+    // See bug report:
+    // https://forums.robertsspaceindustries.com/discussion/229973/controls-input-coupled-gsafe-comstab-toggles-don-t-stay-latched#latest
+    MapKey(&Joystick, S1, SC_IFCS_TOGGLE);
     
     // Weapon Release
     MapKey(&Joystick, S2, SC_LAUNCH_MISSILE);
