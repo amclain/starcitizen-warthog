@@ -336,11 +336,11 @@ int main()
     // Left MFD Buttons
     // ----------------
     
-    // MapKey(&LMFD, OSB01, );
-    // MapKey(&LMFD, OSB02, );
-    // MapKey(&LMFD, OSB03, RADAR_ACTIVE_PASSIVE);
+    MapKey(&LMFD, OSB01, SC_POWER_GROUP_1);
+    MapKey(&LMFD, OSB02, SC_POWER_GROUP_2);
+    MapKey(&LMFD, OSB03, SC_POWER_GROUP_3);
     // MapKey(&LMFD, OSB04, );
-    // MapKey(&LMFD, OSB05, );
+    MapKey(&LMFD, OSB05, SC_POWER_GROUP_RESET);
     
     // MapKey(&LMFD, OSB06, RADAR_ON_OFF);
     // MapKey(&LMFD, OSB07, );
