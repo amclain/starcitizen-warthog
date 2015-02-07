@@ -23,9 +23,7 @@
 // -----------------------------------------------------------------------------
 
 
-// TODO: Voice Attack on throttle left button
-//          OR
-//       Remap mic switch to comms and move shields (to CMS?).
+// TODO: Remap mic switch to comms and move shields (to CMS?).
 //       Mic up/down/left/right used for:
 //          In-Game, TeamSpeak, Future, Future
 //       Mic push:
@@ -116,6 +114,7 @@ define SC_HUD_LEFT_PANEL_LEFT           USB_LEFT_ARROW
 define SC_HUD_LEFT_PANEL_RIGHT          USB_RIGHT_ARROW
 define SC_HUD_MODE_FWD                  USB_SEMICOLON
 define SC_HUD_MODE_BACK                 USB_APOSTROPHE
+define VOICE_ATTACK                     L_ALT + USB_F2
 
 define LED_INTENSITY_LEVEL_0            0
 define LED_INTENSITY_LEVEL_1            43
@@ -330,7 +329,7 @@ int main()
     MapKey(&Throttle, CHB, SC_SHIELD_RESET);
     
     // Left Throttle Button
-    // MapKey(&Throttle, LTB, );
+    MapKey(&Throttle, LTB, VOICE_ATTACK);
     
     // MapKey(&Throttle, EFLNORM,   );
     // MapKey(&Throttle, EFRNORM,   );
