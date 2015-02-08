@@ -51,7 +51,7 @@ can be cycled with TMS hat right `H2R`.
 ### Power Management
 
 Setting the throttle `EAC ARM` switch enables the power management functions
-on the DMS hat, `H3x`.
+on the DMS hat `H3x`.
 
     H3U - Up    - Reset Power Balance
     H3D - Down  - Power Group 3
@@ -60,7 +60,7 @@ on the DMS hat, `H3x`.
 
 ### Strafing
 
-Setting the boat switch forward `BSF` enables strafing on the coolie hat, `CSx`.
+Setting the boat switch forward `BSF` enables strafing on the coolie hat `CSx`.
 
     CSU - Up    - Strafe Up
     CSD - Down  - Strafe Down
@@ -69,7 +69,7 @@ Setting the boat switch forward `BSF` enables strafing on the coolie hat, `CSx`.
 
 ### HUD Navigation
 
-Setting the boat switch backward `BSB` enables HUD navigation on the CMS hat,
+Setting the boat switch backward `BSB` enables HUD navigation on the CMS hat
 `H4x`.
 
     H4U - Up    - Navigate Up
