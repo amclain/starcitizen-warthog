@@ -10,12 +10,14 @@ and [Cougar MFDs](http://www.thrustmaster.com/en_US/products/hotas-cougar).
 
 [View Joystick Layout](joystick_layout.svg)
 
+[MFD Layout Inserts](Cougar-MFD-leaflet.pdf)
+
 
 ## Installation
 
-1. [Download starcitizen-warthog](https://github.com/amclain/starcitizen-tools/releases)
+1. [Download starcitizen-warthog](https://github.com/amclain/starcitizen-warthog/archive/master.zip)
 to your computer.
-1. Copy `layout_starcitizen_warthog.xml` to `StarCitizen\CitizenClient\Data\Controls\Mappings`.
+1. Copy `layout_starcitizen_warthog.xml` to `StarCitizen\CitizenClient\USER\Controls\Mappings`.
 1. Launch `TARGET Script Editor` and open `star_citizen.tmc`.
 1. Run the TARGET script. It will take several seconds for the script to connect
 the virtual devices. It will display `main returned 0` when complete.
@@ -45,6 +47,36 @@ switch's middle `PSM` and back `PSB` postions.
 
 A long press on TMS hat up `H2U` will pin the focused target. Pinned targets
 can be cycled with TMS hat right `H2R`.
+
+### Power Management
+
+Setting the throttle `EAC ARM` switch enables the power management functions
+on the DMS hat, `H3x`.
+
+    H3U - Up    - Reset Power Balance
+    H3D - Down  - Power Group 3
+    H3L - Left  - Power Group 1
+    H3R - Right - Power Group 2
+
+### Strafing
+
+Setting the boat switch forward `BSF` enables strafing on the coolie hat, `CSx`.
+
+    CSU - Up    - Strafe Up
+    CSD - Down  - Strafe Down
+    CSL - Left  - Strafe Left
+    CSR - Right - Strafe Right
+
+### HUD Navigation
+
+Setting the boat switch backward `BSB` enables HUD navigation on the CMS hat,
+`H4x`.
+
+    H4U - Up    - Navigate Up
+    H4D - Down  - Navigate Down
+    H4L - Left  - Navigate Left
+    H4R - Right - Navigate Right
+    H4P - Push  - Confirm
 
 
 ## Advanced
