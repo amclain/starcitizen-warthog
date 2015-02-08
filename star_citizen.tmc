@@ -325,7 +325,11 @@ int main()
     MapKey(&Throttle, SPDB, SC_BRAKE);
     
     // China Hat
-    MapKey(&Throttle, CHF, TRACKIR_CENTER);
+    MapKey(&Throttle, CHF, TEMPO(
+        TRACKIR_CENTER, // Short
+        SC_AIM_RESET,   // Long
+        long_delay_amount
+    ));
     MapKey(&Throttle, CHB, SC_GIMBAL_LOCK);
     
     // Left Throttle Button
