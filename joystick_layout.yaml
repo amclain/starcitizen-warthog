@@ -7,7 +7,7 @@ TG2: Selected Weapon 2
 S1: IFCS Toggle
 S2: Fire Missile
 S3: Launch Countermeasure
-S4: Score Board
+S4: HUD Interact
 H1U: Weapon 1 on TG1
 H1D: Weapon 2 on TG1
 H1L: Weapon 3 on TG1
@@ -22,7 +22,7 @@ H3L: Cycle Missile Fwd
 H3R: Cycle Missile Back
 H4U: Launch Countermeasure
 H4D: Cycle Countermeasure
-H4L: 
+H4L: Radar Zoom
 H4R: Radar Zoom
 SCB: Decoupled Mode
 CSU: UI Overview

@@ -3984,7 +3984,7 @@ PB1RV13swPB1Kuu+Df8AM/tq6750/mmr703lJMOKMAHpYGg+NDtTD/nSWZ+mw/8A1oH/2Q==" transf
 		C522.396,392.234,523.037,392.037,523.847,392.037z"/>
 	
 		<line fill="none" stroke="#000000" stroke-width="0.7199" stroke-miterlimit="10" x1="476.249" y1="422.617" x2="577.133" y2="422.617"/>
-	<text transform="matrix(1 0 0 1 482.499 417.2588)" font-family="'MicrosoftSansSerif'" font-size="10.2669">Score Board</text>
+	<text transform="matrix(1 0 0 1 482.499 417.2588)" font-family="'MicrosoftSansSerif'" font-size="10.2669">HUD Interact</text>
 	
 		<line fill="none" stroke="#000000" stroke-width="0.7199" stroke-miterlimit="10" x1="277.192" y1="24.82" x2="277.192" y2="62.886"/>
 	
@@ -4209,7 +4209,7 @@ PB1RV13swPB1Kuu+Df8AM/tq6750/mmr703lJMOKMAHpYGg+NDtTD/nSWZ+mw/8A1oH/2Q==" transf
 		h1.357v7.701h-1.357v-3.624h-3.624v3.624h-1.361V177.237z"/>
 	
 		<line fill="none" stroke="#000000" stroke-width="0.7199" stroke-miterlimit="10" x1="474.779" y1="208.039" x2="577.152" y2="208.039"/>
-	<text transform="matrix(1 0 0 1 481.1221 202.605)" font-family="'MicrosoftSansSerif'" font-size="10.4183"></text>
+	<text transform="matrix(1 0 0 1 481.1221 202.605)" font-family="'MicrosoftSansSerif'" font-size="10.4183">Radar Zoom</text>
 	
 		<line fill="none" stroke="#000000" stroke-width="0.7199" stroke-miterlimit="10" x1="474.779" y1="226.158" x2="577.152" y2="226.158"/>
 	<path d="M530.159,213.136h2.829c0.595,0,1.133,0.056,1.557,0.168c0.425,0.114,0.738,0.369,0.99,0.766

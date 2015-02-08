@@ -61,7 +61,7 @@ define SC_IFCS_TOGGLE                   DX5
 // define SC_COMSTAB_TOGGLE                DX5
 // define SC_GSAFE_TOGGLE                  DX16
 define SC_LAUNCH_COUNTERMEASURE         DX15
-define SC_SCOREBOARD                    DX4
+define SC_SCOREBOARD                    L_CTL + USB_SPACE
 define SC_TARGET_NEAREST_HOSTILE        DX7
 define SC_TARGET_HOSTILE_FWD            DX9
 define SC_PIN_FOCUSED_TARGET            DX11
@@ -241,7 +241,7 @@ int main()
     MapKey(&Joystick, S3, SC_LAUNCH_COUNTERMEASURE);
     
     // Paddle Switch
-    MapKey(&Joystick, S4, SC_SCOREBOARD);
+    MapKey(&Joystick, S4, SC_HUD_INTERACT);
     
     // TMS Hat
     MapKey(&Joystick, H2U, TEMPO(
@@ -278,12 +278,17 @@ int main()
     MapKey(&Throttle, EACOFF, EXEC("power_selector();"));
     
     // CMS Hat
-    MapKey(&Joystick, H4U, SC_LAUNCH_COUNTERMEASURE);
-    MapKey(&Joystick, H4D, SC_COUNTERMEASURE_CYCLE_FWD);
-    MapKey(&Joystick, H4L, SC_RADAR_ZOOM);
-    MapKey(&Joystick, H4R, SC_RADAR_ZOOM);
-    // MapKey(&Joystick, H4P, RADAR_ACTIVE_PASSIVE); // Short
-    // MapKey(&Joystick, H4P, RADAR_ON_OFF); // Long
+    MapKey(&Joystick, H4U, EXEC("cms_hat_selector();"));
+    MapKey(&Joystick, H4D, EXEC("cms_hat_selector();"));
+    MapKey(&Joystick, H4L, EXEC("cms_hat_selector();"));
+    MapKey(&Joystick, H4R, EXEC("cms_hat_selector();"));
+    MapKey(&Joystick, H4P, EXEC("cms_hat_selector();"));
+    
+    MapKeyR(&Joystick, H4U, EXEC("cms_hat_selector();"));
+    MapKeyR(&Joystick, H4D, EXEC("cms_hat_selector();"));
+    MapKeyR(&Joystick, H4L, EXEC("cms_hat_selector();"));
+    MapKeyR(&Joystick, H4R, EXEC("cms_hat_selector();"));
+    MapKeyR(&Joystick, H4P, EXEC("cms_hat_selector();"));
     
     // ----------------
     // Throttle Buttons
@@ -301,8 +306,8 @@ int main()
     MapKeyR(&Throttle, CSR, EXEC("coolie_hat_selector();"));
     
     MapKey(&Throttle, BSF, EXEC("coolie_hat_mode_changed();"));
-    MapKey(&Throttle, BSM, EXEC("coolie_hat_mode_changed();"));
-    MapKey(&Throttle, BSB, EXEC("coolie_hat_mode_changed();"));
+    MapKey(&Throttle, BSM, EXEC("coolie_hat_mode_changed(); cms_hat_mode_changed();"));
+    MapKey(&Throttle, BSB, EXEC("cms_hat_mode_changed();"));
     
     // Mic Switch
     MapKey(&Throttle, MSU, SC_SHIELD_FWD);
@@ -500,7 +505,6 @@ int coolie_hat_selector()
         if (Throttle[CSL]) ActKey(KEYON + SC_STRAFE_LEFT); else ActKey(SC_STRAFE_LEFT);
         if (Throttle[CSR]) ActKey(KEYON + SC_STRAFE_RIGHT); else ActKey(SC_STRAFE_RIGHT);
     }
-    else if (Throttle[BSB]) {}
     else
     {
         // HUD Menu Selector
@@ -526,4 +530,41 @@ int coolie_hat_mode_changed()
     
     // Update active button.
     coolie_hat_selector();
+}
+
+int cms_hat_selector()
+{
+    if (Throttle[BSB])
+    {
+        // HUD Navigation
+        if (Joystick[H4U]) ActKey(KEYON + SC_HUD_LEFT_PANEL_UP); else ActKey(SC_HUD_LEFT_PANEL_UP);
+        if (Joystick[H4D]) ActKey(KEYON + SC_HUD_LEFT_PANEL_DOWN); else ActKey(SC_HUD_LEFT_PANEL_DOWN);
+        if (Joystick[H4L]) ActKey(KEYON + SC_HUD_LEFT_PANEL_LEFT); else ActKey(SC_HUD_LEFT_PANEL_LEFT);
+        if (Joystick[H4R]) ActKey(KEYON + SC_HUD_LEFT_PANEL_RIGHT); else ActKey(SC_HUD_LEFT_PANEL_RIGHT);
+        if (Joystick[H4P]) ActKey(KEYON + SC_HUD_CONFIRM); else ActKey(SC_HUD_CONFIRM);
+    }
+    else
+    {
+        // Countermeasures / Radar
+        if (Joystick[H4U]) ActKey(KEYON + SC_LAUNCH_COUNTERMEASURE); else ActKey(SC_LAUNCH_COUNTERMEASURE);
+        if (Joystick[H4D]) ActKey(KEYON + SC_COUNTERMEASURE_CYCLE_FWD); else ActKey(SC_COUNTERMEASURE_CYCLE_FWD);
+        if (Joystick[H4L] | Joystick[H4R]) ActKey(KEYON + SC_RADAR_ZOOM); else ActKey(SC_RADAR_ZOOM);
+    }
+}
+
+int cms_hat_mode_changed()
+{
+    // Release keys.
+    ActKey(SC_HUD_LEFT_PANEL_UP);
+    ActKey(SC_HUD_LEFT_PANEL_DOWN);
+    ActKey(SC_HUD_LEFT_PANEL_LEFT);
+    ActKey(SC_HUD_LEFT_PANEL_RIGHT);
+    ActKey(SC_HUD_CONFIRM);
+    
+    ActKey(SC_LAUNCH_COUNTERMEASURE);
+    ActKey(SC_COUNTERMEASURE_CYCLE_FWD);
+    ActKey(SC_RADAR_ZOOM);
+    ActKey(SC_RADAR_ZOOM);
+    
+    cms_hat_selector();
 }
